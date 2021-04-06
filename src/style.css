@@ -219,7 +219,8 @@ button {
   box-shadow: 0 0 0 2px var(--color-fg4);
 }
 
-.StatsTable {
+.StatsTable,
+.DefenseTable {
   display: grid;
   grid-gap: 0.5rem;
   grid-template-columns: max-content max-content 1fr;

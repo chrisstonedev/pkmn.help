@@ -6,11 +6,11 @@ import ScreenDefense from "./ScreenDefense";
 import ScreenOffense from "./ScreenOffense";
 
 const ScreenPokedex = React.lazy(async () => {
-  return await import(
-    /* webpackChunkName: "ScreenPokedex" */
-    /* webpackPrefetch: true */
-    "./ScreenPokedex"
-  );
+  return await import("./ScreenPokedex");
+});
+
+const ScreenBaseStats = React.lazy(async () => {
+  return await import("./ScreenBaseStats");
 });
 
 const tabClass = classnames([
@@ -75,6 +75,13 @@ export default function App() {
           <NavLink
             className={tabClass}
             activeClassName={tabClassActive}
+            to={`/basestats${pokedexParams}`}
+          >
+            Base Stats
+          </NavLink>
+          <NavLink
+            className={tabClass}
+            activeClassName={tabClassActive}
             to="/info"
           >
             Info
@@ -99,8 +106,18 @@ export default function App() {
               </React.Suspense>
             )}
           />
+          <Route
+            path="/basestats"
+            render={() => (
+              <React.Suspense
+                fallback={<div className="Spinner center mt4 f2" />}
+              >
+                <ScreenBaseStats setPokedexParams={setPokedexParams} />
+              </React.Suspense>
+            )}
+          />
           <Route path="/info" component={ScreenInfo} />
-          <Redirect to="/defense" />
+          <Redirect to="/pokedex" />
         </Switch>
       </div>
     </div>

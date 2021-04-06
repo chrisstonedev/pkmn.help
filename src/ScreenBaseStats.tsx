@@ -7,7 +7,7 @@ import { getImage } from "./getImage";
 import Paginator from "./Paginator";
 import { AllPokemon, Pokemon } from "./pkmn";
 import Search from "./Search";
-import DefenseTable from "./DefenseTable";
+import StatsTable from "./StatsTable";
 import { useSearch } from "./useSearch";
 
 const PAGE_SIZE = 20;
@@ -95,7 +95,7 @@ function Monster(props: MonsterProps) {
           height={imgSize}
         />
       </div>
-      <DefenseTable pokemon={props.pokemon} />
+      <StatsTable pokemon={props.pokemon} />
     </div>
   );
 }
@@ -106,7 +106,7 @@ interface DexProps {
   setPokedexParams: (params: string) => void;
 }
 
-export default function ScreenPokedex(props: DexProps) {
+export default function ScreenBaseStats(props: DexProps) {
   const search = useSearch();
   const history = useHistory();
 
@@ -169,4 +169,4 @@ export default function ScreenPokedex(props: DexProps) {
   );
 }
 
-ScreenPokedex.displayName = "ScreenPokedex";
+ScreenBaseStats.displayName = "ScreenBaseStats";
