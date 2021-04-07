@@ -220,7 +220,7 @@ button {
 }
 
 .StatsTable,
-.DefenseTable {
+.EvolutionTable {
   display: grid;
   grid-gap: 0.5rem;
   grid-template-columns: max-content max-content 1fr;
@@ -438,4 +438,10 @@ button {
   --type-color-1: #dedede;
   --type-color-2: #808080;
   --type-color-3: #fafafa;
+}
+
+.evolveArrow {
+  font-size: xx-large;
+  line-height: 1;
+  text-align: center;
 }

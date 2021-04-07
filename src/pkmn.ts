@@ -14,6 +14,8 @@ export interface Pokemon {
   spAttack: number;
   spDefense: number;
   speed: number;
+  evolve: {id: string, condition: string}[];
+  transform: {id: string, condition: string}[];
 }
 
 export const AllPokemon: Pokemon[] = data;

@@ -9,6 +9,10 @@ const ScreenPokedex = React.lazy(async () => {
   return await import("./ScreenPokedex");
 });
 
+const ScreenEvolution = React.lazy(async () => {
+  return await import("./ScreenEvolution");
+});
+
 const ScreenBaseStats = React.lazy(async () => {
   return await import("./ScreenBaseStats");
 });
@@ -75,6 +79,13 @@ export default function App() {
           <NavLink
             className={tabClass}
             activeClassName={tabClassActive}
+            to={`/evolution${pokedexParams}`}
+          >
+            Evolution
+          </NavLink>
+          <NavLink
+            className={tabClass}
+            activeClassName={tabClassActive}
             to={`/basestats${pokedexParams}`}
           >
             Base Stats
@@ -103,6 +114,16 @@ export default function App() {
                 fallback={<div className="Spinner center mt4 f2" />}
               >
                 <ScreenPokedex setPokedexParams={setPokedexParams} />
+              </React.Suspense>
+            )}
+          />
+          <Route
+            path="/evolution"
+            render={() => (
+              <React.Suspense
+                fallback={<div className="Spinner center mt4 f2" />}
+              >
+                <ScreenEvolution setPokedexParams={setPokedexParams} />
               </React.Suspense>
             )}
           />
