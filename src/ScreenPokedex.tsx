@@ -9,9 +9,13 @@ import { AllPokemon, Pokemon } from "./pkmn";
 import Search from "./Search";
 import DefenseTable from "./DefenseTable";
 import { useSearch } from "./useSearch";
+import StatsTable from "./StatsTable";
+import EvolutionTable from "./EvolutionTable";
+import { useState } from 'react';
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
+const [display, setDisplay] = useState(0);
 
 interface MonsterTypeProps {
   type: Type;
@@ -44,6 +48,7 @@ interface MonsterProps {
 function Monster(props: MonsterProps) {
   const displayNumber = "#" + String(props.pokemon.number).padStart(3, "0");
   const imgSize = 68 * 2;
+  const choice = 0;
   return (
     <div
       className={classnames(
@@ -67,16 +72,6 @@ function Monster(props: MonsterProps) {
           ))}
         </div>
         <div className="mv2 lh-copy">
-          <Link
-            className="underline fg-link OutlineFocus"
-            to={`/defense?${new URLSearchParams({
-              types: props.pokemon.types.join(" "),
-            })}#matchup-defense`}
-            aria-label={`Defense for ${props.pokemon.name}`}
-          >
-            Defense
-          </Link>{" "}
-          &bull;{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -95,7 +90,13 @@ function Monster(props: MonsterProps) {
           height={imgSize}
         />
       </div>
-      <DefenseTable pokemon={props.pokemon} />
+      {display === 0 ? (
+        <StatsTable pokemon={props.pokemon} />
+      ) : display === 1 ? (
+        <DefenseTable pokemon={props.pokemon} />
+      ) : (
+        <EvolutionTable pokemon={props.pokemon} />
+      )}
     </div>
   );
 }
@@ -143,6 +144,10 @@ export default function ScreenPokedex(props: DexProps) {
     props.setPokedexParams(params);
   }, [params]);
 
+  function setDisplay(id: number) {
+    setDisplay(id);
+  }
+
   return (
     <main className="ph3 mt3 center content-narrow">
       <Search
@@ -151,6 +156,20 @@ export default function ScreenPokedex(props: DexProps) {
           update(newQuery, 0);
         }}
       />
+      <div>
+        <a
+          className="f6 link dim br1 ph3 pv2 mb2 dib white bg-near-black"
+          onSubmit={() => setDisplay(0)}
+        >
+          Stats
+        </a>
+        <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-gray" onSubmit={() => setDisplay(1)}>
+          Defense
+        </a>
+        <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-mid-gray" onSubmit={() => setDisplay(2)}>
+          Evolution
+        </a>
+      </div>
       <Paginator
         currentPage={page}
         urlForPage={(newPage) => {

@@ -9,14 +9,6 @@ const ScreenPokedex = React.lazy(async () => {
   return await import("./ScreenPokedex");
 });
 
-const ScreenEvolution = React.lazy(async () => {
-  return await import("./ScreenEvolution");
-});
-
-const ScreenBaseStats = React.lazy(async () => {
-  return await import("./ScreenBaseStats");
-});
-
 const tabClass = classnames([
   "no-underline",
   "pv2 ph2 f5",
@@ -79,20 +71,6 @@ export default function App() {
           <NavLink
             className={tabClass}
             activeClassName={tabClassActive}
-            to={`/evolution${pokedexParams}`}
-          >
-            Evolution
-          </NavLink>
-          <NavLink
-            className={tabClass}
-            activeClassName={tabClassActive}
-            to={`/basestats${pokedexParams}`}
-          >
-            Base Stats
-          </NavLink>
-          <NavLink
-            className={tabClass}
-            activeClassName={tabClassActive}
             to="/info"
           >
             Info
@@ -114,26 +92,6 @@ export default function App() {
                 fallback={<div className="Spinner center mt4 f2" />}
               >
                 <ScreenPokedex setPokedexParams={setPokedexParams} />
-              </React.Suspense>
-            )}
-          />
-          <Route
-            path="/evolution"
-            render={() => (
-              <React.Suspense
-                fallback={<div className="Spinner center mt4 f2" />}
-              >
-                <ScreenEvolution setPokedexParams={setPokedexParams} />
-              </React.Suspense>
-            )}
-          />
-          <Route
-            path="/basestats"
-            render={() => (
-              <React.Suspense
-                fallback={<div className="Spinner center mt4 f2" />}
-              >
-                <ScreenBaseStats setPokedexParams={setPokedexParams} />
               </React.Suspense>
             )}
           />
